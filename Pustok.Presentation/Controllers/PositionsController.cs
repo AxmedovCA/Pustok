@@ -16,7 +16,7 @@ namespace Pustok.Presentation.Controllers
             return Ok(positions);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        public async Task <IActionResult> GetById([FromRoute] Guid id)
         {
             var position  =await _service.GetByIdAsync(id);
             return Ok(position);
@@ -24,21 +24,21 @@ namespace Pustok.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] PositionCreateDto dto)
         {
-            await _service.CreateAsync(dto);
-            return Ok(dto);
+           var result =  await _service.CreateAsync(dto);
+            return Ok(result);
 
         }
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] PositionUpdateDto dto)
         {
-            await _service.UpdateAsync(dto);
-            return Ok("Updated!!");
+            var result = await _service.UpdateAsync(dto);
+            return Ok(result);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
-            await _service.DeleteAsync(id);
-            return Ok("Deleted");
+            var result = await _service.DeleteAsync(id);
+            return Ok(result);
         }
     }
 }

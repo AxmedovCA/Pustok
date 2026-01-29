@@ -15,3 +15,4 @@ C:\Users\user\Desktop\StepDZ\Pustok\Pustok.DataAccess\obj\Debug\net8.0\refint\Pu
 C:\Users\user\Desktop\StepDZ\Pustok\Pustok.DataAccess\obj\Debug\net8.0\Pustok.DataAccess.pdb
 C:\Users\user\Desktop\StepDZ\Pustok\Pustok.DataAccess\obj\Debug\net8.0\Pustok.DataAccess.genruntimeconfig.cache
 C:\Users\user\Desktop\StepDZ\Pustok\Pustok.DataAccess\obj\Debug\net8.0\ref\Pustok.DataAccess.dll
+C:\Users\user\Desktop\StepDZ\Pustok\Pustok.DataAccess\obj\Debug\net8.0\Pustok.DataAccess.sourcelink.json

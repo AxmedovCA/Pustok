@@ -1,5 +1,6 @@
 using Pustok.DataAccess.ServiceRegistrations;
 using Pustok.Business.ServiceRegistrations;
+using Pustok.Presentation.Middlewares;
 
 namespace Pustok.Presentation
 {
@@ -18,7 +19,7 @@ namespace Pustok.Presentation
             builder.Services.AddDataAccessServices(builder.Configuration);
             builder.Services.AddBusinessServices();
             var app = builder.Build();
-
+            app.UseMiddleware<GlobalExceptionHandler>();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

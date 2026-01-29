@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pustok.Core.Entites
 {
-    public class Employee:BaseEntity
+    public class Employee: BaseAuditableEntity
     {
         public string Name { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;

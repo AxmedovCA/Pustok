@@ -15,7 +15,7 @@ namespace Pustok.DataAccess.Repositories.Abstractions.Generic
 
         void Delete(T entity);
 
-        IQueryable<T> GetAll();
+        IQueryable<T> GetAll(bool ignoreQueryFilter = false);
 
         Task<T?> GetByIdAsync(Guid id);
 

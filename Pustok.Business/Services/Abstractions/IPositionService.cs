@@ -1,4 +1,5 @@
 ﻿using Pustok.Business.Dtos.PositionDtos;
+using Pustok.Business.Dtos.ResultDtos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,12 +11,12 @@ namespace Pustok.Business.Services.Abstractions
 {
     public interface IPositionService
     {
-        Task CreateAsync(PositionCreateDto dto);
-        Task UpdateAsync(PositionUpdateDto dto);
-        Task DeleteAsync(Guid id);
-        Task<List<PositionGetDto>> GetAllAsync();
+        Task<ResultDto> CreateAsync(PositionCreateDto dto);
+        Task<ResultDto> UpdateAsync(PositionUpdateDto dto);
+        Task<ResultDto> DeleteAsync(Guid id);
+        Task<ResultDto<List<PositionGetDto>>> GetAllAsync();
 
-        Task <PositionGetDto> GetByIdAsync(Guid id);
+        Task <ResultDto<PositionGetDto>> GetByIdAsync(Guid id);
         //Task <List<PositionGetDto>> GetEmployeeByPositionId(Guid positionId);
 
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Pustok.Business.Dtos.EmployeeDtos;
+using Pustok.Business.Dtos.ResultDtos;
 using Pustok.Business.Exceptions;
 using Pustok.Business.Services.Abstractions;
 using Pustok.Core.Entites;
@@ -16,7 +17,7 @@ namespace Pustok.Business.Services.Implementations
 {
     internal class EmployeeService(IEmployeeRepository _repository,IMapper _mapper,ICloudinaryService _cloudinaryService) : IEmployeeService
     {
-        public async Task CreateAsync(EmployeeCreateDto dto)
+        public async Task<ResultDto> CreateAsync(EmployeeCreateDto dto)
         {
             var employee = _mapper.Map<Employee>(dto);
 
@@ -25,9 +26,10 @@ namespace Pustok.Business.Services.Implementations
 
             await _repository.AddAsync(employee);
             await _repository.SaveChangesAsync();
+            return new("cREATE");
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<ResultDto> DeleteAsync(Guid id)
         {
             var employee = await _repository.GetByIdAsync(id);
             if(employee is null)
@@ -38,16 +40,18 @@ namespace Pustok.Business.Services.Implementations
             await _repository.SaveChangesAsync();
 
             await _cloudinaryService.FileDeleteAsync(employee.ImagePath);
+
+            return new("Deleted");
         }
 
-        public async Task<List<EmployeeGetDto>> GetAllAsync()
+        public async Task<ResultDto<List<EmployeeGetDto>>> GetAllAsync()
         {
             var employees =await _repository.GetAll().Include(x=>x.Position).ToListAsync();
             var dtos = _mapper.Map<List<EmployeeGetDto>>(employees);
-            return dtos; 
+            return new(dtos); 
         }
           
-        public async Task<EmployeeGetDto> GetByIdAsync(Guid id)
+        public async Task<ResultDto<EmployeeGetDto>> GetByIdAsync(Guid id)
         {
             var employee = await _repository.GetByIdAsync(id);
             if (employee is null)
@@ -55,10 +59,10 @@ namespace Pustok.Business.Services.Implementations
                 throw new NotFoundException("Employee not found");
             }
             var dto = _mapper.Map<EmployeeGetDto>(employee);
-            return dto;
+            return new(dto);
         }
 
-        public async Task UpdateAsync(EmployeeUpdateDto dto)
+        public async Task<ResultDto> UpdateAsync(EmployeeUpdateDto dto)
         {
             var employee = await _repository.GetByIdAsync(dto.Id);
             if (employee is null)
@@ -75,6 +79,7 @@ namespace Pustok.Business.Services.Implementations
             employee = _mapper.Map(dto, employee);  
             _repository.Update(employee);
             await _repository.SaveChangesAsync();
+            return new("Updated");
 
         }
     }

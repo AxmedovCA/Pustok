@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pustok.Core.Entites.Common;
 using Pustok.DataAccess.Context;
+using Pustok.DataAccess.Interceptors;
 using Pustok.DataAccess.Repositories.Abstractions;
 using Pustok.DataAccess.Repositories.Implementations;
 using System;
@@ -22,6 +24,7 @@ namespace Pustok.DataAccess.ServiceRegistrations
             });
             services.AddScoped<IEmployeeRepository,EmployeeRepository>();
             services.AddScoped<IPositionRepository,PositionRepository>();
+            services.AddScoped<BaseAuditableInterceptor>();
         }
 
     }
